@@ -983,7 +983,7 @@
   "com_ui_mcp_oauth_cancelled": "{{0}} OAuth 登录已取消",
   "com_ui_mcp_oauth_timeout": "{{0}} OAuth 登录超时",
   "com_ui_mcp_server_not_found": "未找到服务器。",
-  "com_ui_mcp_servers": "MCP 服务器",
+  "com_ui_mcp_servers": "专属助手",
   "com_ui_mcp_update_var": "更新 {{0}}",
   "com_ui_mcp_url": "MCP 服务器 URL",
   "com_ui_medium": "中",

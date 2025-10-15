@@ -1,58 +1,110 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <meta charset="utf-8" />
-    <base href="/" />
-    <meta name="theme-color" content="#171717" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="description" content="LibreChat - An open source chat application with support for multiple AI models" />
-    <title>LibreChat</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon-180x180.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content" />
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
-    </style>
-    <script>
-      const theme = localStorage.getItem('color-theme');
-      const loadingContainerStyle = document.createElement('style');
-      let backgroundColor;
 
-      if (theme === 'dark') {
-        backgroundColor = '#0d0d0d';
-      } else if (theme === 'light') {
-        backgroundColor = '#ffffff';
-      } else if (theme === 'system') {
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        backgroundColor = prefersDarkScheme ? '#0d0d0d' : '#ffffff';
-      } else {
-        backgroundColor = '#ffffff';
+<head>
+  <meta charset="utf-8" />
+  <base href="/" />
+  <meta name="theme-color" content="#171717" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="LibreChat - An open source chat application with support for multiple AI models" />
+  <title>LibreChat</title>
+  <!-- Use SVG favicon for better scalability -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/icon-192x192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-192x192.png" sizes="192x192" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content" />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    /* 动态渐变背景动画 */
+    @keyframes gradient-x {
+      0% {
+        background-position: 0% 50%;
       }
 
-      loadingContainerStyle.innerHTML = `
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* 覆盖 CSS 变量 - 浅色模式 */
+    html {
+      --surface-primary: transparent !important;
+    }
+
+    /* 覆盖 CSS 变量 - 深色模式 */
+    .dark {
+      --surface-primary: transparent !important;
+    }
+
+    /* 为 body 添加科技蓝色动态背景 - 浅色模式 */
+    body {
+      background: linear-gradient(-45deg, #e6f3ff, #cce7ff, #b3dbff, #99cfff) !important;
+      background-size: 400% 400% !important;
+      animation: gradient-x 20s ease infinite !important;
+    }
+
+    /* 深色模式的科技蓝色动态背景 */
+    .dark body {
+      background: linear-gradient(-45deg, #0a0e1a, #0d1219, #0f1419, #0a0e1a) !important;
+      background-size: 400% 400% !important;
+      animation: gradient-x 20s ease infinite !important;
+    }
+
+    /* 确保主容器背景透明 */
+    #root {
+      background: transparent !important;
+    }
+  </style>
+  <script>
+    const theme = localStorage.getItem('color-theme');
+    const loadingContainerStyle = document.createElement('style');
+    let backgroundColor;
+
+    if (theme === 'dark') {
+      backgroundColor = 'transparent';
+      document.documentElement.classList.add('dark');
+    } else if (theme === 'light') {
+      backgroundColor = 'transparent';
+    } else if (theme === 'system') {
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      backgroundColor = 'transparent';
+      if (prefersDarkScheme) {
+        document.documentElement.classList.add('dark');
+      }
+    } else {
+      backgroundColor = 'transparent';
+    }
+
+    loadingContainerStyle.innerHTML = `
         #loading-container {
           display: flex;
           align-items: center;
           justify-content: center;
           height: 100vh;
-          background-color: ${backgroundColor};
+          background-color: transparent;
         }
       `;
-      document.head.appendChild(loadingContainerStyle);
-    </script>
-    <script defer type="module" src="/src/main.jsx"></script>
-  </head>
-  <body>
-    <div id="root">
-      <div id="loading-container"></div>
-    </div>
-  </body>
+    document.head.appendChild(loadingContainerStyle);
+  </script>
+  <script defer type="module" src="/src/main.jsx"></script>
+</head>
+
+<body>
+  <div id="root">
+    <div id="loading-container"></div>
+  </div>
+</body>
+
 </html>

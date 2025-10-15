@@ -184,6 +184,7 @@ export default function BadgeRowProvider({
     toolKey: AgentCapabilities.artifacts,
     localStorageKey: LocalStorageKeys.LAST_ARTIFACTS_TOGGLE_,
     isAuthenticated: true,
+    defaultPinned: false,
   });
 
   const mcpServerManager = useMCPServerManager({ conversationId });

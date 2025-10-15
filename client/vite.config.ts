@@ -41,9 +41,8 @@ export default defineConfig(({ command }) => ({
       workbox: {
         globPatterns: [
           '**/*.{js,css,html}',
-          'assets/favicon*.png',
+          'assets/favicon.svg',
           'assets/icon-*.png',
-          'assets/apple-touch-icon*.png',
           'assets/maskable-icon.png',
           'manifest.webmanifest',
         ],
@@ -60,19 +59,9 @@ export default defineConfig(({ command }) => ({
         theme_color: '#009688',
         icons: [
           {
-            src: 'assets/favicon-32x32.png',
-            sizes: '32x32',
-            type: 'image/png',
-          },
-          {
-            src: 'assets/favicon-16x16.png',
-            sizes: '16x16',
-            type: 'image/png',
-          },
-          {
-            src: 'assets/apple-touch-icon-180x180.png',
-            sizes: '180x180',
-            type: 'image/png',
+            src: 'assets/favicon.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
           },
           {
             src: 'assets/icon-192x192.png',
@@ -98,6 +87,7 @@ export default defineConfig(({ command }) => ({
     sourcemap: process.env.NODE_ENV === 'development',
     outDir: './dist',
     minify: 'terser',
+    assetsInlineLimit: 0,
     rollupOptions: {
       preserveEntrySignatures: 'strict',
       output: {

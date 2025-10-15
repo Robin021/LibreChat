@@ -96,14 +96,9 @@ export default function useTextarea({
         return localize('com_endpoint_message_not_appendable');
       }
 
-      const sender =
-        isAssistant || isAgent
-          ? getEntityName({ name: entityName, isAgent, localize })
-          : getSender(conversation as TEndpointOption);
-
-      return `${localize('com_endpoint_message_new', {
-        0: sender ? sender : localize('com_endpoint_ai'),
-      })}`;
+      // Default placeholder: empty string (no "Message <target>" text)
+      // Keep informative placeholders only for disabled/invalid states above.
+      return '';
     };
 
     const placeholder = getPlaceholderText();
